@@ -8,19 +8,19 @@ export default async function LoginLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookiesStore = await cookies();
-
-  const authToken = cookiesStore.get('auth_token');
-
-  console.log('authToken', authToken);
-  const api = getApi();
-  const user = await api.getUser(authToken?.value || '');
-
-  console.log('user', user);
-
-  if (!authToken?.value || user?.error) {
-    redirect('/login');
-  }
+  // const cookiesStore = await cookies();
+  //
+  // const authToken = cookiesStore.get('auth_token');
+  //
+  // console.log('authToken', authToken);
+  // const api = getApi();
+  // const user = await api.getUser(authToken?.value || '');
+  //
+  // console.log('user', user);
+  //
+  // if (!authToken?.value || user?.error) {
+  //   redirect('/login');
+  // }
 
   return <>
     {children}

@@ -19,6 +19,7 @@ export type LoginActionState = {
     type: 'success' | 'error',
     message: string,
   },
+  success: boolean,
 }
 
 export async function login(prevState: LoginActionState, formData: FormData): Promise<LoginActionState> {
@@ -33,25 +34,26 @@ export async function login(prevState: LoginActionState, formData: FormData): Pr
         type: 'error',
         message: 'Veuillez corriger les erreurs dans le formulaire.',
       },
+      success: false,
     };
   }
 
-  const api = getApi();
+  // const api = getApi();
+  //
+  // const response = await api.login(result.data?.email, result.data?.password);
+  //
+  // if (response?.error && response?.error?.length > 0) {
+  //   return {
+  //     data: prevState.data,
+  //     toast: {
+  //       type: 'error',
+  //       message: response.error[0].message,
+  //     },
+  //   }
+  // }
 
-  const response = await api.login(result.data?.email, result.data?.password);
-
-  if (response?.error && response?.error?.length > 0) {
-    return {
-      data: prevState.data,
-      toast: {
-        type: 'error',
-        message: response.error[0].message,
-      },
-    }
-  }
-
-  const cookieStore = await cookies();
-  cookieStore.set('auth_token', response?.data?.token);
+  // const cookieStore = await cookies();
+  // cookieStore.set('auth_token', response?.data?.token);
 
   redirect('/home');
 
@@ -61,19 +63,6 @@ export async function login(prevState: LoginActionState, formData: FormData): Pr
       type: 'success',
       message: 'Connexion réussie',
     },
+    success: true,
   };
-
-
-  // return {
-  //   errors: result.error?.issues,
-  //   data: result.success ? result.data : prevState.data,
-  //   toast: result.success ? {
-  //     type: 'success',
-  //     message: 'Connexion réussie',
-  //   } : {
-  //     type: 'error',
-  //     message: 'Veuillez corriger les erreurs dans le formulaire.',
-  //   },
-  // };
-
 }

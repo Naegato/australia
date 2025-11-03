@@ -20,6 +20,7 @@ export default function LoginPage() {
       email: '',
       password: '',
     },
+    success: false,
   });
 
   const errs = useMemo(() => {

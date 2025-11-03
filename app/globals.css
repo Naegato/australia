@@ -43,7 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-pink-dark: var(--pink-dark);
   --color-pink-light: var(--pink-light);
-  --color-pink-meddium: var(--pink-meddium);
+  --color-pink-medium: var(--pink-medium);
 }
 
 :root {
@@ -82,7 +82,7 @@
 
   --pink-dark: #FF0077;
   --pink-light: #FFD4E4;
-  --pink-meddium: #FFA4C5;
+  --pink-medium: #FFA4C5;
 }
 
 .dark {
