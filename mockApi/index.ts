@@ -151,6 +151,29 @@ app.post('/users/login', (req, res) => {
   })
 })
 
+app.post('/users/me', (req, res) => {
+  const authorization = req.headers.authorization;
+  console.log(authorization);
+  if (!authorization) {
+    return res.status(401).send('Invalid token');
+  }
+  const token = authorization.split(' ')[1];
+
+  try {
+    const verify = jwt.verify(token, 'secret')
+
+    if (!verify) {
+      return res.status(401).send('Invaliiid token');
+    }
+
+    const userId = verify?.id
+
+
+  } catch (err) {
+    return res.status(401).send('Invaliid token');
+  }
+})
+
 // /users/register
 app.listen(PORT, () => {
   console.log(`🚀 Serveur dispo sur http://localhost:${PORT}`);

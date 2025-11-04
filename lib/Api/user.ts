@@ -32,4 +32,13 @@ export class User {
       body: JSON.stringify(user)
     })
   }
+
+  async me() {
+    return await fetch(`${this.client.url}/users/me`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.client.token}`,
+      },
+    })
+  }
 }
