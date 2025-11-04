@@ -1,0 +1,25 @@
+{
+  "name": "australia-mock",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --watch ./ --ext ts --exec ts-node ./index.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.19",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "node-json-db": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.8.0",
+    "@types/node-json-db": "^0.9.3",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,7 +1,6 @@
 'use server';
 
 import { z, ZodError } from "zod";
-import { getApi } from '@/lib/adapter/inMemory';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -42,23 +41,23 @@ export async function register(prevState: RegisterActionState, formData: FormDat
     };
   }
 
-  const api = getApi();
-
-  const response = await api.register(result.data);
-
-  if (response?.error && response?.error?.length > 0) {
-    return {
-      data: prevState.data,
-      toast: {
-        type: 'error',
-        message: response.error[0].message,
-      },
-    }
-  }
-
-  const cookieStore = await cookies();
-
-  cookieStore.set('auth_token', response.data.token);
+  // const api = getApi();
+  //
+  // const response = await api.register(result.data);
+  //
+  // if (response?.error && response?.error?.length > 0) {
+  //   return {
+  //     data: prevState.data,
+  //     toast: {
+  //       type: 'error',
+  //       message: response.error[0].message,
+  //     },
+  //   }
+  // }
+  //
+  // const cookieStore = await cookies();
+  //
+  // cookieStore.set('auth_token', response.data.token);
   redirect('/home');
 
   return {

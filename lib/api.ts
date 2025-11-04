@@ -1,28 +1,15 @@
-import { Adapter } from '@/types/adapter';
-import { NewUser } from '@/types/user';
+import { User } from '@/lib/Api/user';
+import { Capsule } from '@/lib/Api/capsule';
 
 export class Api {
-  constructor(private readonly adapter: Adapter) {
-
+  public readonly user: User;
+  public readonly capsule: Capsule;
+  constructor(public readonly url: string) {
+    this.user = new User(this);
+    this.capsule = new Capsule(this);
   }
+}
 
-  async getUser(token: string) {
-    return await this.adapter.getUser(token);
-  }
-
-  async login(username: string, password: string) {
-    return await this.adapter.login(username, password);
-  }
-
-  async register(user: NewUser) {
-    return await this.adapter.register(user);
-  }
-
-  async getCapsules(token: string) {
-    return await this.adapter.getCapsules(token);
-  }
-
-  async getCapsule(token: string, id: string) {
-    return await this.adapter.getCapsule(token, id);
-  }
+export const getApi = () => {
+  return new Api('http://localhost:4000');
 }

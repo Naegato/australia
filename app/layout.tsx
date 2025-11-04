@@ -5,7 +5,6 @@ import { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AuthStoreInitializer } from '@/store/auth';
 import { cookies } from 'next/headers';
-import { getApi } from '@/lib/adapter/inMemory';
 
 const PontanoSansFont = localFont({
   src: '../public/fonts/Pontano_Sans/PontanoSans-VariableFont_wght.ttf',
@@ -28,18 +27,18 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const api = getApi();
+  // const api = getApi();
   const token = cookieStore.get('auth_token')?.value || null;
 
-  const userRes = await api.getUser(token || '');
-  const user = userRes?.data || null;
+  // const userRes = await api.getUser(token || '');
+  // const user = userRes?.data || null;
 
   return (
     <html lang="fr">
       <body
         className={`${PontanoSansFont.variable} ${PinyonScriptFont.variable} antialiased`}
       >
-        <AuthStoreInitializer token={token} user={user} />
+        <AuthStoreInitializer token={token} user={null} />
         {children}
         <Toaster />
       </body>

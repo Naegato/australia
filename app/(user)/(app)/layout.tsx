@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { getApi } from '@/lib/adapter/inMemory';
 import { redirect } from 'next/navigation';
 import { LoggedLayout } from '@/components/layout/logged';
 

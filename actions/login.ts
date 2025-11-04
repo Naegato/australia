@@ -1,9 +1,11 @@
 'use server';
 
 import { z, ZodError } from "zod";
-import { getApi } from '@/lib/adapter/inMemory';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getApi } from '@/lib/api';
+import { parseJwt } from '@/lib/utils';
+import { User } from '@/types/user';
 
 const schema = z.object({
   email: z.email('Email invalide').min(1, 'L\'email est requis'),
@@ -38,24 +40,32 @@ export async function login(prevState: LoginActionState, formData: FormData): Pr
     };
   }
 
-  // const api = getApi();
-  //
-  // const response = await api.login(result.data?.email, result.data?.password);
-  //
-  // if (response?.error && response?.error?.length > 0) {
-  //   return {
-  //     data: prevState.data,
-  //     toast: {
-  //       type: 'error',
-  //       message: response.error[0].message,
-  //     },
-  //   }
-  // }
+  const res = await getApi().user.login(result?.data?.email,result?.data?.password);
 
-  // const cookieStore = await cookies();
-  // cookieStore.set('auth_token', response?.data?.token);
+  if (!res.ok) {
+    return {
+      data: prevState.data,
+      toast: {
+        type: 'error',
+        message: 'Une erreur est survenue.',
+      },
+      success: false,
+    };
+  }
 
-  redirect('/home');
+  const resData = await res.json();
+
+  console.log(resData);
+  const decoded: Pick<User, 'id' | 'roles' | 'email'> = parseJwt(resData.token);
+
+  const cookieStore = await cookies();
+  cookieStore.set('auth_token', resData?.token);
+
+  if (decoded.roles.includes('admin')) {
+    redirect('/admin');
+  } else {
+    redirect('/home');
+  }
 
   return {
     data: prevState.data,

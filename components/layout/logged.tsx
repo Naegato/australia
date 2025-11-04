@@ -13,8 +13,6 @@ export const LoggedLayout = ({
 }) => {
   const {user} = useAuthStore();
 
-  console.log('LoggedLayout user', user);
-
   if (!user) {
     redirect('/login');
   }

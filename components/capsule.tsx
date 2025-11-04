@@ -1,29 +1,28 @@
 'use client';
 
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { cn } from '@/lib/utils';
-import { Lock, LockKeyhole, LockKeyholeOpen } from 'lucide-react';
+import { LockKeyhole, LockKeyholeOpen } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { Capsule } from '@/types/capsule';
 
 export const CapsuleCard: FC<{
-  date: Dayjs;
-  identifier: string;
+  data: Capsule
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({
-  date,
   className,
-  identifier,
+  data,
   ...props
 }) => {
-
   const now = dayjs();
-  const isAvailable = !date.isAfter(now);
+  const capsuleDate = dayjs(data.openingDate);
+  const isAvailable = !capsuleDate.isAfter(now);
 
   if (!isAvailable) {
     return <div className={cn("w-46 aspect-square bg-pink-light rounded-2xl flex items-center justify-center", className)} {...props}>
       <div className="bg-white w-full flex py-3 px-4 gap-3 justify-center">
         <LockKeyhole />
-        <span>{date.format('DD/MM/YYYY')}</span>
+        <span>{capsuleDate.format('DD/MM/YYYY')}</span>
       </div>
     </div>
   }
@@ -36,13 +35,13 @@ export const CapsuleCard: FC<{
       className
     )}
     onClick={() => {
-      redirect(`/capsules/${identifier}`)
+      redirect(`/capsules/${data.id}`)
     }}
     {...props}
   >
     <div className="bg-pink-dark w-full flex py-3 px-4 gap-3 justify-center text-white">
       <LockKeyholeOpen />
-      <span>{date.format('DD/MM/YYYY')}</span>
+      <span>{capsuleDate.format('DD/MM/YYYY')}</span>
     </div>
   </div>
 }

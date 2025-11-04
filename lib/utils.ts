@@ -8,3 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function parseJwt (token: string) {
+  return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+}
