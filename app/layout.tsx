@@ -35,8 +35,6 @@ export default async function RootLayout({
 
   console.log(user);
 
-  // const userRes = await api.getUser(token || '');
-  // const user = userRes?.data || null;
 
   return (
     <html lang="fr">

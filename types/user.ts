@@ -3,7 +3,7 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
-  roles: string[];
+  roles: ('admin' | 'user' | 'content')[];
 }
 
 export type NewUser = {

@@ -162,12 +162,15 @@ app.post('/users/me', (req, res) => {
   try {
     const verify = jwt.verify(token, 'secret')
 
-    if (!verify) {
+    if (!verify || typeof verify === 'string') {
       return res.status(401).send('Invaliiid token');
     }
 
-    const userId = verify?.id
+    const userId: string = verify?.id;
 
+    return res.json({
+      data: users.find(user => user.id === userId) || null,
+    })
 
   } catch (err) {
     return res.status(401).send('Invaliid token');
