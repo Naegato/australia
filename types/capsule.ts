@@ -3,4 +3,5 @@ export type Capsule = {
   openingDate: string;
   content: string;
   openingMessage?: string;
+  createdBy: string;
 }
