@@ -93,6 +93,11 @@ export function AdminUsersPage({
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnVisibility: {
+        id: false,
+      },
+    },
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -103,9 +108,6 @@ export function AdminUsersPage({
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => {
-              if(header.id === 'id') {
-                return <Fragment key={header.id} />;
-              }
               return (
                 <TableHead key={header.id}>
                   {header.isPlaceholder
@@ -122,10 +124,6 @@ export function AdminUsersPage({
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map(row => {
-          if(row.id === 'id') {
-            return <Fragment key={row.id} />;
-          }
-
           return (
             <TableRow key={row.id}>
               {row.getVisibleCells().map(cell => (
@@ -139,10 +137,6 @@ export function AdminUsersPage({
       </TableBody>
       <TableFooter>
         {table.getFooterGroups().map(footerGroup => {
-          if(footerGroup.id === 'id') {
-            return <Fragment key={footerGroup.id} />;
-          }
-
           return (
             <TableRow key={footerGroup.id}>
               {footerGroup.headers.map(header => (

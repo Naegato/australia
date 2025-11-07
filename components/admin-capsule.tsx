@@ -103,6 +103,12 @@ export function AdminCapsulesPage({
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnVisibility: {
+        id: false,
+        content: false,
+      },
+    },
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -113,9 +119,6 @@ export function AdminCapsulesPage({
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map(header => {
-              if(header.id === 'id' || header.id === 'content') {
-                return <Fragment key={header.id} />;
-              }
               return (
                 <TableHead key={header.id}>
                   {header.isPlaceholder
@@ -132,11 +135,6 @@ export function AdminCapsulesPage({
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map(row => {
-          // TODO FIX IT
-          if(row.id === 'id' || row.id === 'content') {
-            return <Fragment key={row.id} />;
-          }
-
           return (
             <TableRow key={row.id}>
               {row.getVisibleCells().map(cell => (
@@ -150,10 +148,6 @@ export function AdminCapsulesPage({
       </TableBody>
       <TableFooter>
         {table.getFooterGroups().map(footerGroup => {
-          if(footerGroup.id === 'id' || footerGroup.id === 'content') {
-            return <Fragment key={footerGroup.id} />;
-          }
-
           return (
             <TableRow key={footerGroup.id}>
               {footerGroup.headers.map(header => (

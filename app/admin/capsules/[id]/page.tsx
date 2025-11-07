@@ -1,5 +1,5 @@
-import { User } from '@/types/user';
-import { AdminUserDetailsPage } from '@/components/admin-user-details';
+import { Capsule } from '@/types/capsule';
+import { AdminCapsuleDetailsPage } from '@/components/admin-capsule-details';
 
 export default async function AdminUserDetails({
   params
@@ -10,13 +10,15 @@ export default async function AdminUserDetails({
 }) {
   const { id } = await params;
 
-  const user: User = {
+  const capsule: Capsule = {
     id: id,
-    lastname: 'test',
-    firstname: 'test',
-    email: 'test',
-    roles: ['admin'],
+    openingDate: '2024-12-31',
+    content: `
+      <p><span style="white-space: pre-wrap;">Lorem </span></p><h1><span style="white-space: pre-wrap;">ipsum </span></h1><ol><li value="1"><ol><li value="1"><ol><li value="1"><ol><li value="1"><ol><li value="1"><span style="white-space: pre-wrap;">in dolor et</span></li></ol></li></ol></li></ol></li></ol></li></ol><p><span style="white-space: pre-wrap;">something else what</span></p>
+    `,
+    openingMessage: 'Happy New Year!',
+    createdBy: 'admin-001',
   }
 
-  return <AdminUserDetailsPage data={user} />
+  return <AdminCapsuleDetailsPage data={capsule} />
 }
